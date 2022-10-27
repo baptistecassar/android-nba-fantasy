@@ -41,13 +41,12 @@ dependencies {
 
     implementation koin.android
     testImplementation koin.koin_test
-//    testImplementation koin.koin_test_junit
-//    testImplementation "org.koin:koin-test:2.1.6"
-//    androidTestImplementation "org.koin:koin-test:2.1.6"
 
     testImplementation junit.junit
+    testImplementation androidxTest.core
     androidTestImplementation androidxTest.junit
     androidTestImplementation androidxTest.espresso
+    testImplementation robolectric.robolectric
 
     implementation project(':data')
 }

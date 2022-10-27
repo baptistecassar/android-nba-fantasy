@@ -9,5 +9,5 @@ import retrofit2.http.GET
 interface GamesApi {
 
     @GET("stats/scoreboardv3?GameDate=2022-10-23&LeagueID=00")
-    suspend fun getAllMovies(): ScoreboardResponse
+    suspend fun getScoreboard(): ScoreboardResponse
 }

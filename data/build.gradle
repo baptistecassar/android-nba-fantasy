@@ -51,9 +51,16 @@ dependencies {
     implementation retrofit.converter_moshi
     implementation retrofit.converter_gson
 
+    // room
+    implementation room.room_runtime
+    implementation room.room_ktx
+    kapt room.room_compiler
+
     testImplementation junit.junit
+    testImplementation androidxTest.core
     androidTestImplementation androidxTest.junit
     androidTestImplementation androidxTest.espresso
-    testImplementation "org.mockito:mockito-core:4.3.0"
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.7.2")
+    testImplementation mockito.mockito_core
+    testImplementation mockwebserver.mockwebserver
+    testImplementation robolectric.robolectric
 }

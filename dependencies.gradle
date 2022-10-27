@@ -5,12 +5,17 @@ ext {
             appcompat       : "1.4.0",
             material        : "1.4.0",
             junit           : "4.13.2",
+            core_test       : "1.4.0",
             junit_test      : "1.1.3",
             espresso_test   : "3.4.0",
             constraintlayout: "2.1.4",
             retrofit        : "2.9.0",
             koin            : "3.2.0",
             moshi           : "1.13.0",
+            room            : "2.4.3",
+            mockito         : "4.3.0",
+            mockwebserver   : "4.7.2",
+            robolectric     : "4.8.1",
     ]
 
 
@@ -28,6 +33,18 @@ ext {
             junit: "junit:junit:${versions.junit}",
     ]
 
+    mockito = [
+            mockito_core: "org.mockito:mockito-core:${versions.mockito}",
+    ]
+
+    mockwebserver = [
+            mockwebserver: "com.squareup.okhttp3:mockwebserver:${versions.mockwebserver}",
+    ]
+
+    robolectric = [
+            robolectric: "org.robolectric:robolectric:${versions.robolectric}",
+    ]
+
     koin = [
             android        : "io.insert-koin:koin-android:${versions.koin}",
             core           : "io.insert-koin:koin-core:${versions.koin}",
@@ -39,6 +56,7 @@ ext {
 
     androidxTest = [
             junit   : "androidx.test.ext:junit:${versions.junit_test}",
+            core    : "androidx.test:core:${versions.core_test}",
             espresso: "androidx.test.espresso:espresso-core:${versions.espresso_test}",
     ]
 
@@ -54,5 +72,11 @@ ext {
             moshi               : "com.squareup.moshi:moshi:${versions.moshi}",
             moshi_kotlin        : "com.squareup.moshi:moshi-kotlin:${versions.moshi}",
             moshi_kotlin_codegen: "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshi}",
+    ]
+
+    room = [
+            room_runtime : "androidx.room:room-runtime:${versions.room}",
+            room_compiler: "androidx.room:room-compiler:${versions.room}",
+            room_ktx     : "androidx.room:room-ktx:${versions.room}",
     ]
 }

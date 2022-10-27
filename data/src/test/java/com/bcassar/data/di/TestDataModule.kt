@@ -1,5 +1,8 @@
-package com.bcassar.data
+package com.bcassar.data.di
 
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
+import com.bcassar.data.local.NbaFantasyDatabase
 import com.bcassar.data.remote.api.GamesApi
 import com.bcassar.data.utils.MockInterceptor
 import com.squareup.moshi.Moshi
@@ -12,7 +15,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
  * Created by bcassar on 26/10/2022
  */
 
-val testDataModule = module {
+val testRemoteDataModule = module {
 
     single {
         OkHttpClient.Builder()
@@ -35,6 +38,26 @@ val testDataModule = module {
 
     single {
         get<Retrofit>().create(GamesApi::class.java)
+    }
+
+}
+
+val testLocalDataModule = module {
+
+    single {
+        Room.databaseBuilder(
+            ApplicationProvider.getApplicationContext(),
+            NbaFantasyDatabase::class.java,
+            "NbaFantasyDatabase.db"
+        ).allowMainThreadQueries().build()
+    }
+
+    single {
+        get<NbaFantasyDatabase>().gamesDao()
+    }
+
+    single {
+        get<NbaFantasyDatabase>().teamsDao()
     }
 
 }

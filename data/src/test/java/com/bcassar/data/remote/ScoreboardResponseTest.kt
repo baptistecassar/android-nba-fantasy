@@ -1,13 +1,12 @@
 package com.bcassar.data.remote
 
-import com.bcassar.data.di.dataModule
 import com.bcassar.data.remote.api.GamesApi
+import com.bcassar.data.remote.di.remoteDataModule
 import com.bcassar.data.remote.model.ScoreboardResponse
 import com.bcassar.data.utils.MockResponseFileReader
 import com.bcassar.data.utils.Utils.scoreboardResponseSuccessfulFile
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -21,25 +20,20 @@ import org.mockito.MockitoAnnotations
 
 class ScoreboardResponseTest : KoinTest {
 
-    private lateinit var mockWebServer: MockWebServer
-
     // Lazy inject property
     private val gamesApi: GamesApi by inject()
 
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        mockWebServer = MockWebServer()
         startKoin {
-            modules(dataModule)
+            modules(remoteDataModule)
         }
-        mockWebServer.start()
     }
 
     @After
     fun tearDown() {
         stopKoin()
-        mockWebServer.shutdown()
     }
 
     @Test

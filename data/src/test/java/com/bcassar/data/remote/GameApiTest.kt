@@ -1,7 +1,7 @@
 package com.bcassar.data.remote
 
+import com.bcassar.data.di.testRemoteDataModule
 import com.bcassar.data.remote.api.GamesApi
-import com.bcassar.data.testDataModule
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -24,7 +24,7 @@ class GameApiTest : KoinTest {
     @Before
     fun setUp() {
         startKoin {
-            modules(testDataModule)
+            modules(testRemoteDataModule)
         }
     }
 
@@ -40,7 +40,7 @@ class GameApiTest : KoinTest {
 
     @Test
     fun `Valid scoreboard response json should parse correctly`() = runBlocking {
-        val scoreboardResponse = gamesApi.getAllMovies()
+        val scoreboardResponse = gamesApi.getScoreboard()
         assertNotNull(scoreboardResponse)
         assertEquals(scoreboardResponse.scoreboard.games.size, 7)
     }

@@ -1,4 +1,4 @@
-package com.bcassar.data.di
+package com.bcassar.data.remote.di
 
 import com.bcassar.data.remote.api.GamesApi
 import com.bcassar.data.remote.interceptor.NbaStatsInterceptor
@@ -9,10 +9,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 /**
- * Created by bcassar on 26/10/2022
+ * Created by bcassar on 27/10/2022
  */
 
-val dataModule = module {
+val remoteDataModule = module {
 
     single {
         OkHttpClient.Builder()

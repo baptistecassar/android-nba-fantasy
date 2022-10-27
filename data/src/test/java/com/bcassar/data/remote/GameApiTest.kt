@@ -1,7 +1,7 @@
 package com.bcassar.data.remote
 
-import com.bcassar.data.di.testRemoteDataModule
 import com.bcassar.data.remote.api.GamesApi
+import com.bcassar.sharedtest.testRemoteDataModule
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals

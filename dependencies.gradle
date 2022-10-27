@@ -16,6 +16,7 @@ ext {
             mockito         : "4.3.0",
             mockwebserver   : "4.7.2",
             robolectric     : "4.8.1",
+            coroutines_core : "1.6.4",
     ]
 
 
@@ -78,5 +79,9 @@ ext {
             room_runtime : "androidx.room:room-runtime:${versions.room}",
             room_compiler: "androidx.room:room-compiler:${versions.room}",
             room_ktx     : "androidx.room:room-ktx:${versions.room}",
+    ]
+
+    coroutines = [
+            core: "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines_core}",
     ]
 }

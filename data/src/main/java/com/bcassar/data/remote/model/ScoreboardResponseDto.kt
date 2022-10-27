@@ -8,20 +8,20 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class ScoreboardResponse(
-    @Json(name = "scoreboard") val scoreboard: Scoreboard
+data class ScoreboardResponseDto(
+    @Json(name = "scoreboard") val scoreboard: ScoreboardDto
 )
 
 @JsonClass(generateAdapter = true)
-data class Scoreboard(
+data class ScoreboardDto(
     @Json(name = "gameDate") val gameDate: String,
     @Json(name = "leagueId") val leagueId: String,
     @Json(name = "leagueName") val leagueName: String,
-    @Json(name = "games") val games: List<Game>
+    @Json(name = "games") val games: List<GameDto>
 )
 
 @JsonClass(generateAdapter = true)
-data class Game(
+data class GameDto(
     @Json(name = "gameId") val gameId: String,
     @Json(name = "gameCode") val gameCode: String,
     @Json(name = "gameStatus") val gameStatus: Long,
@@ -34,12 +34,12 @@ data class Game(
     @Json(name = "seriesGameNumber") val seriesGameNumber: String,
     @Json(name = "seriesText") val seriesText: String,
     @Json(name = "ifNecessary") val ifNecessary: Boolean,
-    @Json(name = "homeTeam") val homeTeam: Team,
-    @Json(name = "awayTeam") val awayTeam: Team,
+    @Json(name = "homeTeam") val homeTeam: TeamDto,
+    @Json(name = "awayTeam") val awayTeam: TeamDto,
 )
 
 @JsonClass(generateAdapter = true)
-data class Team(
+data class TeamDto(
     @Json(name = "teamId") val teamID: Long,
     @Json(name = "teamName") val teamName: String,
     @Json(name = "teamCity") val teamCity: String,
@@ -48,11 +48,11 @@ data class Team(
     @Json(name = "wins") val wins: Long,
     @Json(name = "losses") val losses: Long,
     @Json(name = "score") val score: Long,
-    @Json(name = "periods") val periods: List<Period>
+    @Json(name = "periods") val periods: List<PeriodDto>
 )
 
 @JsonClass(generateAdapter = true)
-data class Period(
+data class PeriodDto(
     @Json(name = "period") val period: Long,
     @Json(name = "score") val score: Long
 )

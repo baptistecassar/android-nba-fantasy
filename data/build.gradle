@@ -1,21 +1,21 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 apply from: "${rootProject.projectDir}/dependencies.gradle"
 
 android {
-    namespace 'com.bcassar.nbafantasy'
+    namespace 'com.bcassar.data'
     compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.bcassar.nbafantasy"
         minSdk rootProject.ext.minSdkVersion
         targetSdk rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -36,17 +36,31 @@ android {
 dependencies {
     implementation androidx.core
     implementation androidx.appcompat
-    implementation androidx.constraintlayout
     implementation google.material
 
     implementation koin.android
     testImplementation koin.koin_test
 
+    // moshi
+    implementation moshi.moshi
+    implementation moshi.moshi_kotlin
+    kapt moshi.moshi_kotlin_codegen
+
+    // retrofit
+    implementation retrofit.retrofit
+    implementation retrofit.converter_moshi
+    implementation retrofit.converter_gson
+
+    // room
+    implementation room.room_runtime
+    implementation room.room_ktx
+    kapt room.room_compiler
+
     testImplementation junit.junit
     testImplementation androidxTest.core
     androidTestImplementation androidxTest.junit
     androidTestImplementation androidxTest.espresso
+    testImplementation mockito.mockito_core
+    testImplementation mockwebserver.mockwebserver
     testImplementation robolectric.robolectric
-
-    implementation project(':data')
 }

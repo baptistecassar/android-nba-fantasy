@@ -1,6 +1,5 @@
-package com.bcassar.data.utils
+package com.bcassar.sharedtest
 
-import com.bcassar.data.utils.Utils.scoreboardResponseSuccessfulFile
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Protocol
@@ -13,7 +12,7 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 class MockInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         if (chain.request().url.toUri().toString().contains("scoreboardv3")) {
-            val responseString = MockResponseFileReader(scoreboardResponseSuccessfulFile).content
+            val responseString = scoreboardResponse
             return Response.Builder()
                 .request(chain.request())
                 .protocol(Protocol.HTTP_2)

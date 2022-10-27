@@ -1,10 +1,9 @@
-package com.bcassar.data.di
+package com.bcassar.sharedtest
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.bcassar.data.local.NbaFantasyDatabase
 import com.bcassar.data.remote.api.GamesApi
-import com.bcassar.data.utils.MockInterceptor
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import org.koin.dsl.module

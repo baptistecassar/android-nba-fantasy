@@ -2,9 +2,9 @@ package com.bcassar.data.remote
 
 import com.bcassar.data.remote.api.GamesApi
 import com.bcassar.data.remote.di.remoteDataModule
-import com.bcassar.data.remote.model.ScoreboardResponse
+import com.bcassar.data.remote.model.ScoreboardResponseDto
 import com.bcassar.data.utils.MockResponseFileReader
-import com.bcassar.data.utils.Utils.scoreboardResponseSuccessfulFile
+import com.bcassar.sharedtest.Utils.scoreboardResponseSuccessfulFile
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import org.junit.After
@@ -52,7 +52,8 @@ class ScoreboardResponseTest : KoinTest {
         val reader = MockResponseFileReader(scoreboardResponseSuccessfulFile)
 
         val moshi: Moshi = Moshi.Builder().build()
-        val adapter: JsonAdapter<ScoreboardResponse> = moshi.adapter(ScoreboardResponse::class.java)
+        val adapter: JsonAdapter<ScoreboardResponseDto> =
+            moshi.adapter(ScoreboardResponseDto::class.java)
         val scoreboardResponse = adapter.fromJson(reader.content)
 
         assertNotNull(scoreboardResponse)

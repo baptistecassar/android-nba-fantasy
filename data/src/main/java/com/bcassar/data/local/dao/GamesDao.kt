@@ -3,6 +3,7 @@ package com.bcassar.data.local.dao
 import androidx.room.*
 import com.bcassar.data.local.entity.GameEntity
 import com.bcassar.data.local.model.GameAndTeams
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Created by bcassar on 27/10/2022
@@ -21,5 +22,5 @@ interface GamesDao {
 
     @Transaction
     @Query("SELECT * FROM game")
-    suspend fun getGameAndTeams(): List<GameAndTeams>
+    fun getGameAndTeams(): Flow<List<GameAndTeams>>
 }

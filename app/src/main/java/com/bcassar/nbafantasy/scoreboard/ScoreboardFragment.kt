@@ -52,6 +52,7 @@ class ScoreboardFragment : Fragment() {
         binding.pager.apply {
             adapter = pagerAdapter
             registerOnPageChangeCallback(dateChangeCallback)
+            currentItem = DateUtils.getDayAfterSeasonStart()
         }
         binding.backArrow.setOnClickListener {
             binding.pager.currentItem = binding.pager.currentItem - 1

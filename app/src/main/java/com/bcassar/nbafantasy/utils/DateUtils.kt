@@ -35,4 +35,13 @@ object DateUtils {
         }
         return simpleDateFormat.format(calendar.time)
     }
+
+    @OptIn(ExperimentalTime::class)
+    fun getDayAfterSeasonStart(): Int {
+        val start = simpleDateFormat.parse(startNbaSeason)
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+        val length = calendar.timeInMillis.minus(start?.time ?: 0)
+        val days = DurationUnit.MILLISECONDS.toTimeUnit().toDays(length)
+        return days.toInt()
+    }
 }

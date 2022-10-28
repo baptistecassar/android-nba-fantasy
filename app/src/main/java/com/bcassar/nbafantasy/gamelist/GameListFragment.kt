@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bcassar.nbafantasy.databinding.FragmentGameListBinding
 import com.bcassar.nbafantasy.utils.argument
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 /**
  * Created by bcassar on 28/10/2022
@@ -25,9 +26,9 @@ class GameListFragment : Fragment() {
     private val binding get() = _binding!!
 
     // Lazy inject ViewModel
-    val gameListViewModel: GameListViewModel by viewModel()
-
     private var date: String by argument()
+    val gameListViewModel: GameListViewModel by viewModel { parametersOf(date) }
+
 
     private val gameAdapter = GameAdapter()
 

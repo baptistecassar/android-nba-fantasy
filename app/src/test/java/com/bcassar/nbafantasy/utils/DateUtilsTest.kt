@@ -19,4 +19,9 @@ class DateUtilsTest {
         assertEquals("2022-10-30", DateUtils.getDayDateWithCalendar(12))
         assertEquals("2022-11-01", DateUtils.getDayDateWithCalendar(14))
     }
+
+    @Test
+    fun `get number of days after start season`() {
+        assertEquals(10, DateUtils.getDayAfterSeasonStart())
+    }
 }

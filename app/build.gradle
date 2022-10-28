@@ -2,15 +2,16 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
+apply from: "${rootProject.projectDir}/dependencies.gradle"
 
 android {
     namespace 'com.bcassar.nbafantasy'
-    compileSdk 32
+    compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "com.bcassar.nbafantasy"
-        minSdk 24
-        targetSdk 32
+        minSdk rootProject.ext.minSdkVersion
+        targetSdk rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -30,15 +31,33 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
+    implementation androidx.core
+    implementation androidx.appcompat
+    implementation androidx.constraintlayout
+    implementation google.material
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation koin.android
+    testImplementation koin.koin_test
+
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+    testImplementation junit.junit
+    testImplementation androidxTest.core
+    androidTestImplementation androidxTest.junit
+    androidTestImplementation androidxTest.espresso
+    testImplementation robolectric.robolectric
+    testImplementation androidx.arch_testing
+    testImplementation coroutines.testing
+    testImplementation mockk.mockk
+
+    implementation project(':data')
+    implementation project(':domain')
+    testImplementation(project(':sharedTest'))
 }

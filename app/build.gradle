@@ -31,6 +31,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -42,11 +45,19 @@ dependencies {
     implementation koin.android
     testImplementation koin.koin_test
 
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
     testImplementation junit.junit
     testImplementation androidxTest.core
     androidTestImplementation androidxTest.junit
     androidTestImplementation androidxTest.espresso
     testImplementation robolectric.robolectric
+    testImplementation androidx.arch_testing
+    testImplementation coroutines.testing
+    testImplementation mockk.mockk
 
     implementation project(':data')
+    implementation project(':domain')
+    testImplementation(project(':sharedTest'))
 }

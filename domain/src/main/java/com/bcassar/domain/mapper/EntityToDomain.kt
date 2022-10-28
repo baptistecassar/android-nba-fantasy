@@ -1,5 +1,6 @@
 package com.bcassar.domain.mapper
 
+import androidx.annotation.VisibleForTesting
 import com.bcassar.data.local.entity.TeamEntity
 import com.bcassar.data.local.model.GameAndTeams
 import com.bcassar.domain.model.Game
@@ -10,7 +11,8 @@ import com.bcassar.domain.utils.toDate
  * Created by bcassar on 27/10/2022
  */
 
-internal fun GameAndTeams.toDomain() =
+@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+fun GameAndTeams.toDomain() =
     Game(
         gameId = this.gameEntity.gameId,
         gameCode = this.gameEntity.gameCode,
@@ -19,7 +21,7 @@ internal fun GameAndTeams.toDomain() =
         period = this.gameEntity.period,
         gameClock = this.gameEntity.gameClock,
         gameTimeUTC = this.gameEntity.gameTimeUTC.toDate(),
-        honeTeam = this.homeTeam.toDomain(),
+        homeTeam = this.homeTeam.toDomain(),
         awayTeam = this.awayTeam.toDomain(),
         homeTeamScore = this.gameEntity.homeTeamScore,
         awayTeamScore = this.gameEntity.awayTeamScore,

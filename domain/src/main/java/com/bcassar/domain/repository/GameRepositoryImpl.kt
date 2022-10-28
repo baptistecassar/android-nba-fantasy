@@ -20,8 +20,8 @@ class GameRepositoryImpl constructor(
     private val gamesDao: GamesDao,
 ) : GameRepository {
 
-    override suspend fun fetchGames(): Flow<List<Game>> {
-        val scoreboardResponse = gamesApi.getScoreboard()
+    override suspend fun fetchGames(dayDate: String): Flow<List<Game>> {
+        val scoreboardResponse = gamesApi.getScoreboard(dayDate)
         val teams = mutableListOf<TeamDto>()
         val games = mutableListOf<GameDto>()
         scoreboardResponse.scoreboard.games.forEach { gameDto ->
@@ -30,8 +30,8 @@ class GameRepositoryImpl constructor(
             teams.add(gameDto.awayTeam)
         }
         teamsDao.saveTeams(teams.map { it.toEntity() })
-        gamesDao.saveGames(games.map { it.toEntity() })
-        return gamesDao.getGameAndTeams()
+        gamesDao.saveGames(games.map { it.toEntity(dayDate) })
+        return gamesDao.getGameAndTeams(dayDate)
             .map { gamesAndTeams ->
                 gamesAndTeams.map { it.toDomain() }
             }

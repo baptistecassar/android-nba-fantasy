@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
  */
 interface GameRepository {
 
-    suspend fun fetchGames(): Flow<List<Game>>
+    suspend fun fetchGames(dayDate: String): Flow<List<Game>>
 
 }

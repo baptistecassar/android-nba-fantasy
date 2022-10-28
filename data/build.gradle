@@ -50,6 +50,7 @@ dependencies {
     implementation retrofit.retrofit
     implementation retrofit.converter_moshi
     implementation retrofit.converter_gson
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
 
     // room
     implementation room.room_runtime

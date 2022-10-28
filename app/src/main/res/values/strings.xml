@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Android NBA Fantasy</string>
+
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="game_list_fragment_label">Game List Fragment</string>
+
+
+    <string name="retry">Retry</string>
 </resources>

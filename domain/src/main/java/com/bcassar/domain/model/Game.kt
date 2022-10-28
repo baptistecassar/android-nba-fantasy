@@ -13,7 +13,7 @@ data class Game(
     val period: Long,
     val gameClock: String,
     val gameTimeUTC: Date,
-    val honeTeam: Team,
+    val homeTeam: Team,
     val awayTeam: Team,
     val homeTeamScore: Long,
     val awayTeamScore: Long,

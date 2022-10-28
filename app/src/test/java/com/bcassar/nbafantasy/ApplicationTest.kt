@@ -3,6 +3,8 @@ package com.bcassar.nbafantasy
 import androidx.test.core.app.ApplicationProvider
 import com.bcassar.data.local.di.localDataModule
 import com.bcassar.data.remote.di.remoteDataModule
+import com.bcassar.domain.di.domainModule
+import com.bcassar.nbafantasy.di.viewModelsModule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.android.ext.koin.androidContext
@@ -21,7 +23,7 @@ class ApplicationTest : KoinTest {
     fun verifyKoinApp() {
         koinApplication {
             androidContext(ApplicationProvider.getApplicationContext())
-            modules(remoteDataModule, localDataModule)
+            modules(remoteDataModule, localDataModule, domainModule, viewModelsModule)
             checkModules()
         }
     }

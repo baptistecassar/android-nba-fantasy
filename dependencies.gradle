@@ -17,6 +17,8 @@ ext {
             mockwebserver   : "4.7.2",
             robolectric     : "4.8.1",
             coroutines_core : "1.6.4",
+            arch_testing    : "2.1.0",
+            mockk           : "1.12.2",
     ]
 
 
@@ -24,6 +26,7 @@ ext {
             core            : "androidx.core:core-ktx:${versions.core}",
             appcompat       : "androidx.appcompat:appcompat:${versions.appcompat}",
             constraintlayout: "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}",
+            arch_testing    : "androidx.arch.core:core-testing:${versions.arch_testing}",
     ]
 
     google = [
@@ -36,6 +39,10 @@ ext {
 
     mockito = [
             mockito_core: "org.mockito:mockito-core:${versions.mockito}",
+    ]
+
+    mockk = [
+            mockk: "io.mockk:mockk:${versions.mockk}",
     ]
 
     mockwebserver = [
@@ -82,6 +89,7 @@ ext {
     ]
 
     coroutines = [
-            core: "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines_core}",
+            core   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines_core}",
+            testing: "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines_core}",
     ]
 }

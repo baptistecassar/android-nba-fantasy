@@ -9,7 +9,11 @@ import okhttp3.Response
 class NbaStatsInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request =
-            chain.request().newBuilder().addHeader("Referer", "https://www.nba.com/").build()
+            chain.request().newBuilder()
+                .addHeader("Referer", "https://www.nba.com/")
+                .header("Connection", "keep-alive")
+                .header("User-Agent", "PostmanRuntime/7.29.2")
+                .build()
         return chain.proceed(request)
     }
 }

@@ -4,7 +4,11 @@
 
     <!-- Strings used for fragments for navigation -->
     <string name="game_list_fragment_label">Game List Fragment</string>
-
+    <string name="scoreboard_fragment_label">Scoreboard Fragment</string>
 
     <string name="retry">Retry</string>
+
+    <!-- Strings used for content description -->
+    <string name="back_date">go back in date</string>
+    <string name="forward_date">go forward in date</string>
 </resources>

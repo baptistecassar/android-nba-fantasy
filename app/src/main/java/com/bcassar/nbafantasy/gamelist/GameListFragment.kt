@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bcassar.nbafantasy.databinding.FragmentGameListBinding
+import com.bcassar.nbafantasy.utils.argument
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -19,12 +20,14 @@ class GameListFragment : Fragment() {
 
     private var _binding: FragmentGameListBinding? = null
 
-    // Lazy inject ViewModel
-    val gameListViewModel: GameListViewModel by viewModel()
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    // Lazy inject ViewModel
+    val gameListViewModel: GameListViewModel by viewModel()
+
+    private var date: String by argument()
 
     private val gameAdapter = GameAdapter()
 
@@ -78,5 +81,13 @@ class GameListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        fun newInstance(date: String): GameListFragment {
+            return GameListFragment().apply {
+                this.date = date
+            }
+        }
     }
 }

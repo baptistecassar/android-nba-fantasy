@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/GameListFragment">
+    app:startDestination="@id/ScoreboardFragment">
 
     <fragment
-        android:id="@+id/GameListFragment"
-        android:name="com.bcassar.nbafantasy.gamelist.GameListFragment"
+        android:id="@+id/ScoreboardFragment"
+        android:name="com.bcassar.nbafantasy.scoreboard.ScoreboardFragment"
         android:label="@string/game_list_fragment_label"
-        tools:layout="@layout/fragment_game_list" />
+        tools:layout="@layout/fragment_scoreboard" />
 
 </navigation>

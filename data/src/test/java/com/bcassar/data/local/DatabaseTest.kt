@@ -3,7 +3,6 @@ package com.bcassar.data.local
 import com.bcassar.data.local.dao.GamesDao
 import com.bcassar.data.local.dao.TeamsDao
 import com.bcassar.sharedtest.*
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
@@ -79,7 +78,7 @@ class DatabaseTest : KoinTest {
         teamsDao.saveTeams(teams)
         val entities = listOf(game, game.copy(gameDay = "2022-03-08", gameId = "123456789"))
         gamesDao.saveGames(entities)
-        val entitiesSaved = gamesDao.getGameAndTeams(testDate).first()
+        val entitiesSaved = gamesDao.getGameAndTeams(testDate)
         Assert.assertEquals(entitiesSaved.size, 1)
         val gameAndTeams = entitiesSaved.first()
         Assert.assertNotNull(gameAndTeams.gameEntity)

@@ -12,7 +12,6 @@ import com.bcassar.sharedtest.lakers
 import com.bcassar.sharedtest.testDate
 import io.mockk.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.flowOf
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Rule
@@ -59,7 +58,7 @@ class GameListViewModelTest : KoinTest {
 
     @Test
     fun `check fetching successful`() = runBlocking {
-        coEvery { gameRepository.fetchGames(testDate) } returns flowOf(successResource)
+        coEvery { gameRepository.fetchGames(testDate) } returns successResource
         gameListViewModel.fetchGameList().join()
         val event = gameListViewModel.gameListEvent.getOrAwaitValue()
         assertNotNull(event)

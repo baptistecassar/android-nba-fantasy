@@ -8,8 +8,7 @@ import com.bcassar.data.remote.model.TeamDto
 import com.bcassar.domain.mapper.toDomain
 import com.bcassar.domain.mapper.toEntity
 import com.bcassar.domain.model.Game
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import com.bcassar.domain.model.GameStatus
 
 /**
  * Created by bcassar on 27/10/2022
@@ -20,7 +19,18 @@ class GameRepositoryImpl constructor(
     private val gamesDao: GamesDao,
 ) : GameRepository {
 
-    override suspend fun fetchGames(dayDate: String): Flow<List<Game>> {
+    override suspend fun fetchGames(dayDate: String): List<Game> {
+        val savedGames = gamesDao.getGameAndTeams(dayDate).map { it.toDomain() }
+        val allGamesFinished = savedGames.all { it.gameStatus == GameStatus.FINISHED }
+        return if (savedGames.isEmpty() || !allGamesFinished) {
+            fetchAndSaveScoreboard(dayDate)
+            gamesDao.getGameAndTeams(dayDate).map { it.toDomain() }
+        } else {
+            savedGames
+        }
+    }
+
+    private suspend fun fetchAndSaveScoreboard(dayDate: String) {
         val scoreboardResponse = gamesApi.getScoreboard(dayDate)
         val teams = mutableListOf<TeamDto>()
         val games = mutableListOf<GameDto>()
@@ -31,11 +41,6 @@ class GameRepositoryImpl constructor(
         }
         teamsDao.saveTeams(teams.map { it.toEntity() })
         gamesDao.saveGames(games.map { it.toEntity(dayDate) })
-        return gamesDao.getGameAndTeams(dayDate)
-            .map { gamesAndTeams ->
-                val gameList = gamesAndTeams.map { it.toDomain() }
-                gameList
-            }
     }
 
 }

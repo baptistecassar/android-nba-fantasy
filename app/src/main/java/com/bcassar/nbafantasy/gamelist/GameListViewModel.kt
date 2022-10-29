@@ -28,9 +28,8 @@ class GameListViewModel constructor(
     fun fetchGameList() = CoroutineScope(Dispatchers.IO).launch {
         _gameListEvent.postValue(Event(GameListEvent.GameListFetching))
         try {
-            gameRepository.fetchGames(dayDate).collect { games ->
-                _gameListEvent.postValue(Event(GameListEvent.GameListFetched(games)))
-            }
+            val games = gameRepository.fetchGames(dayDate)
+            _gameListEvent.postValue(Event(GameListEvent.GameListFetched(games)))
         } catch (e: Exception) {
             _gameListEvent.postValue(Event(GameListEvent.GameListFetchingFailed(e)))
         }

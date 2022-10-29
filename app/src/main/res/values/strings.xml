@@ -5,8 +5,12 @@
     <!-- Strings used for fragments for navigation -->
     <string name="game_list_fragment_label">Game List Fragment</string>
     <string name="scoreboard_fragment_label">Scoreboard Fragment</string>
+    <string name="fantasy_fragment_label">Fantasy Fragment</string>
+    <string name="player_stats_list_fragment_label">Player Stat List Fragment</string>
 
     <string name="retry">Retry</string>
+    <string name="games">Games</string>
+    <string name="fantasy">TTFL</string>
 
     <!-- Strings used for content description -->
     <string name="back_date">go back in date</string>

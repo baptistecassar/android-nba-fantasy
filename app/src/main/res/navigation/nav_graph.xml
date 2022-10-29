@@ -3,12 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/ScoreboardFragment">
+    app:startDestination="@id/scoreboardFragment">
 
     <fragment
-        android:id="@+id/ScoreboardFragment"
+        android:id="@+id/scoreboardFragment"
         android:name="com.bcassar.nbafantasy.scoreboard.ScoreboardFragment"
         android:label="@string/game_list_fragment_label"
-        tools:layout="@layout/fragment_scoreboard" />
+        tools:layout="@layout/fragment_day_pager" />
+
+    <fragment
+        android:id="@+id/fantasyFragment"
+        android:name="com.bcassar.nbafantasy.fantasy.FantasyFragment"
+        android:label="@string/fantasy_fragment_label"
+        tools:layout="@layout/fragment_day_pager" />
 
 </navigation>

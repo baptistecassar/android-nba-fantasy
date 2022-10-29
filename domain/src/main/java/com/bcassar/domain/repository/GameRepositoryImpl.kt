@@ -33,7 +33,8 @@ class GameRepositoryImpl constructor(
         gamesDao.saveGames(games.map { it.toEntity(dayDate) })
         return gamesDao.getGameAndTeams(dayDate)
             .map { gamesAndTeams ->
-                gamesAndTeams.map { it.toDomain() }
+                val gameList = gamesAndTeams.map { it.toDomain() }
+                gameList
             }
     }
 

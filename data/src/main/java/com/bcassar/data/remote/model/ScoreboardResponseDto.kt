@@ -24,7 +24,7 @@ data class ScoreboardDto(
 data class GameDto(
     @Json(name = "gameId") val gameId: String,
     @Json(name = "gameCode") val gameCode: String,
-    @Json(name = "gameStatus") val gameStatus: Long,
+    @Json(name = "gameStatus") val gameStatus: Int,
     @Json(name = "gameStatusText") val gameStatusText: String,
     @Json(name = "period") val period: Long,
     @Json(name = "gameClock") val gameClock: String,

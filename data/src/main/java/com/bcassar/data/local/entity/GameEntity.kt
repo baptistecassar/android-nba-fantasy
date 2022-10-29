@@ -23,7 +23,7 @@ import androidx.room.PrimaryKey
 data class GameEntity(
     @PrimaryKey @ColumnInfo(name = "gameId") val gameId: String,
     @ColumnInfo(name = "gameCode") val gameCode: String,
-    @ColumnInfo(name = "gameStatus") val gameStatus: Long,
+    @ColumnInfo(name = "gameStatus") val gameStatus: Int,
     @ColumnInfo(name = "gameStatusText") val gameStatusText: String,
     @ColumnInfo(name = "period") val period: Long,
     @ColumnInfo(name = "gameClock") val gameClock: String,

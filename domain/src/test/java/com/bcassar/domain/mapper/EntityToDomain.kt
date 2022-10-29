@@ -1,6 +1,7 @@
 package com.bcassar.domain.mapper
 
 import com.bcassar.data.local.model.GameAndTeams
+import com.bcassar.domain.model.GameStatus
 import com.bcassar.sharedtest.blazers
 import com.bcassar.sharedtest.game
 import com.bcassar.sharedtest.lakers
@@ -44,7 +45,7 @@ class EntityToDomain {
 
         assertEquals(game.gameId, gameDomain.gameId)
         assertEquals(game.gameCode, gameDomain.gameCode)
-        assertEquals(game.gameStatus, gameDomain.gameStatus)
+        assertEquals(GameStatus.fromInt(game.gameStatus), gameDomain.gameStatus)
         assertEquals(game.gameStatusText, gameDomain.gameStatusText)
         assertEquals(game.period, gameDomain.period)
         assertEquals(game.gameClock, gameDomain.gameClock)

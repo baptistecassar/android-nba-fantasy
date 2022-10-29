@@ -4,6 +4,7 @@ import androidx.annotation.VisibleForTesting
 import com.bcassar.data.local.entity.TeamEntity
 import com.bcassar.data.local.model.GameAndTeams
 import com.bcassar.domain.model.Game
+import com.bcassar.domain.model.GameStatus
 import com.bcassar.domain.model.Team
 import com.bcassar.domain.utils.toDate
 
@@ -16,7 +17,7 @@ fun GameAndTeams.toDomain() =
     Game(
         gameId = this.gameEntity.gameId,
         gameCode = this.gameEntity.gameCode,
-        gameStatus = this.gameEntity.gameStatus,
+        gameStatus = GameStatus.fromInt(this.gameEntity.gameStatus),
         gameStatusText = this.gameEntity.gameStatusText,
         period = this.gameEntity.period,
         gameClock = this.gameEntity.gameClock,

@@ -23,7 +23,7 @@ class ExampleUnitTest {
     fun timezone_isCorrect() {
         val calendar = Calendar.getInstance(TimeZone.getTimeZone("America/New_York"))
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        assertEquals(2, hour)
+        assertEquals(15, hour)
     }
 
     @OptIn(ExperimentalTime::class)

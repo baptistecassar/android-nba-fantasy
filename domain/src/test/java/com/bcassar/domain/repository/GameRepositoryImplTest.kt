@@ -1,6 +1,7 @@
 package com.bcassar.domain.repository
 
 import com.bcassar.domain.di.domainModule
+import com.bcassar.sharedtest.testDate
 import com.bcassar.sharedtest.testLocalDataModule
 import com.bcassar.sharedtest.testRemoteDataModule
 import kotlinx.coroutines.flow.first
@@ -45,7 +46,7 @@ class GameRepositoryImplTest : KoinTest {
 
     @Test
     fun `should fetch and saves scoreboard`() = runBlocking {
-        val gameList = gameRepository.fetchGames().first()
+        val gameList = gameRepository.fetchGames(testDate).first()
         assertNotNull(gameList)
         assertEquals(gameList.size, 7)
     }

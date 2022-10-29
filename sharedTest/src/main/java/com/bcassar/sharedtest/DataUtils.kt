@@ -6,6 +6,8 @@ import com.bcassar.data.local.entity.TeamEntity
 /**
  * Created by bcassar on 27/10/2022
  */
+val testDate = "2022-10-23"
+
 val lakers = TeamEntity(
     teamID = 1610612747,
     teamName = "Lakers",
@@ -33,6 +35,7 @@ val game = GameEntity(
     gameStatusText = "Final",
     period = 4,
     gameClock = "",
+    gameDay = testDate,
     gameTimeUTC = "2022-10-23T19:30:00Z",
     homeTeamId = 1610612747,
     awayTeamId = 1610612757,

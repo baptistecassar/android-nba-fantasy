@@ -28,6 +28,7 @@ data class GameEntity(
     @ColumnInfo(name = "period") val period: Long,
     @ColumnInfo(name = "gameClock") val gameClock: String,
     @ColumnInfo(name = "gameTimeUTC") val gameTimeUTC: String,
+    @ColumnInfo(name = "gameDay") val gameDay: String,
     @ColumnInfo(name = "homeTeamId") val homeTeamId: Long,
     @ColumnInfo(name = "awayTeamId") val awayTeamId: Long,
     @ColumnInfo(name = "homeTeamScore") val homeTeamScore: Long,

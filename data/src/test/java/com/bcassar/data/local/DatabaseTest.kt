@@ -2,10 +2,7 @@ package com.bcassar.data.local
 
 import com.bcassar.data.local.dao.GamesDao
 import com.bcassar.data.local.dao.TeamsDao
-import com.bcassar.sharedtest.blazers
-import com.bcassar.sharedtest.game
-import com.bcassar.sharedtest.lakers
-import com.bcassar.sharedtest.testLocalDataModule
+import com.bcassar.sharedtest.*
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -80,14 +77,15 @@ class DatabaseTest : KoinTest {
     fun getGameWithTeamsSuccess() = runBlocking {
         val teams = listOf(lakers, blazers)
         teamsDao.saveTeams(teams)
-        val entities = listOf(game)
+        val entities = listOf(game, game.copy(gameDay = "2022-03-08", gameId = "123456789"))
         gamesDao.saveGames(entities)
-        val entitiesSaved = gamesDao.getGameAndTeams().first()
+        val entitiesSaved = gamesDao.getGameAndTeams(testDate).first()
         Assert.assertEquals(entitiesSaved.size, 1)
         val gameAndTeams = entitiesSaved.first()
         Assert.assertNotNull(gameAndTeams.gameEntity)
         Assert.assertNotNull(gameAndTeams.awayTeam)
         Assert.assertNotNull(gameAndTeams.homeTeam)
+        Assert.assertNotNull(testDate, gameAndTeams.gameEntity.gameDay)
         Assert.assertEquals(gameAndTeams.gameEntity.gameId, game.gameId)
         Assert.assertEquals(gameAndTeams.awayTeam.teamID, blazers.teamID)
         Assert.assertEquals(gameAndTeams.homeTeam.teamID, lakers.teamID)

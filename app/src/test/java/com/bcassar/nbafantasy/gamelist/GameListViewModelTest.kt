@@ -9,6 +9,7 @@ import com.bcassar.nbafantasy.utils.getOrAwaitValue
 import com.bcassar.sharedtest.blazers
 import com.bcassar.sharedtest.game
 import com.bcassar.sharedtest.lakers
+import com.bcassar.sharedtest.testDate
 import io.mockk.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flowOf
@@ -34,7 +35,7 @@ class GameListViewModelTest : KoinTest {
 
     private val gameRepository: GameRepository = mockk()
     private val gameListViewModel by lazy {
-        GameListViewModel(gameRepository)
+        GameListViewModel(testDate, gameRepository)
     }
 
     private val successResource = listOf(
@@ -49,7 +50,7 @@ class GameListViewModelTest : KoinTest {
     @Test
     fun `check fetching failed`() = runBlocking {
         val gameRepository: GameRepository = mockk()
-        coEvery { gameRepository.fetchGames() } throws java.lang.Exception(errorResource)
+        coEvery { gameRepository.fetchGames(testDate) } throws java.lang.Exception(errorResource)
         gameListViewModel.fetchGameList().join()
         val event = gameListViewModel.gameListEvent.getOrAwaitValue()
         assertNotNull(event)
@@ -58,7 +59,7 @@ class GameListViewModelTest : KoinTest {
 
     @Test
     fun `check fetching successful`() = runBlocking {
-        coEvery { gameRepository.fetchGames() } returns flowOf(successResource)
+        coEvery { gameRepository.fetchGames(testDate) } returns flowOf(successResource)
         gameListViewModel.fetchGameList().join()
         val event = gameListViewModel.gameListEvent.getOrAwaitValue()
         assertNotNull(event)

@@ -21,6 +21,6 @@ interface GamesDao {
     suspend fun getAllGames(): List<GameEntity>
 
     @Transaction
-    @Query("SELECT * FROM game")
-    fun getGameAndTeams(): Flow<List<GameAndTeams>>
+    @Query("SELECT * FROM game WHERE gameDay = :dayDate")
+    fun getGameAndTeams(dayDate: String): Flow<List<GameAndTeams>>
 }

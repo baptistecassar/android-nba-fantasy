@@ -1,6 +1,7 @@
 package com.bcassar.domain.mapper
 
 import com.bcassar.sharedtest.Utils
+import com.bcassar.sharedtest.testDate
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
@@ -32,13 +33,14 @@ class DtoToEntity {
         assertNotNull(scoreboardResponse)
         val game = scoreboardResponse?.scoreboard?.games?.first()
         assertNotNull(game)
-        val entity = game?.toEntity()
+        val entity = game?.toEntity(testDate)
         assertNotNull(entity)
         assertEquals(game?.gameId, entity?.gameId)
         assertEquals(game?.gameCode, entity?.gameCode)
         assertEquals(game?.gameStatus, entity?.gameStatus)
         assertEquals(game?.gameStatusText, entity?.gameStatusText)
         assertEquals(game?.period, entity?.period)
+        assertEquals(testDate, entity?.gameDay)
         assertEquals(game?.gameClock, entity?.gameClock)
         assertEquals(game?.gameTimeUTC, entity?.gameTimeUTC)
         assertEquals(game?.homeTeam?.teamID, entity?.homeTeamId)

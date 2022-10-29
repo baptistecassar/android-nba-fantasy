@@ -9,5 +9,5 @@ import org.koin.dsl.module
  */
 
 val viewModelsModule = module {
-    viewModel { GameListViewModel(get()) }
+    viewModel { parameters -> GameListViewModel(dayDate = parameters.get(), get()) }
 }

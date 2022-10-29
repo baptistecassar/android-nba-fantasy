@@ -20,7 +20,7 @@ internal fun TeamDto.toEntity() =
         losses = this.losses,
     )
 
-internal fun GameDto.toEntity() =
+internal fun GameDto.toEntity(dayDate: String) =
     GameEntity(
         gameId = this.gameId,
         gameCode = this.gameCode,
@@ -29,6 +29,7 @@ internal fun GameDto.toEntity() =
         period = this.period,
         gameClock = this.gameClock,
         gameTimeUTC = this.gameTimeUTC,
+        gameDay = dayDate,
         homeTeamId = this.homeTeam.teamID,
         awayTeamId = this.awayTeam.teamID,
         homeTeamScore = this.homeTeam.score,

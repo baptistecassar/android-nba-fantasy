@@ -13,7 +13,7 @@ import com.bcassar.data.local.entity.TeamEntity
 interface TeamsDao {
 
     /**
-     * Save games
+     * Save teams
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveTeams(entities: List<TeamEntity>)

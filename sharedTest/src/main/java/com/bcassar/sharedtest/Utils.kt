@@ -9,6 +9,7 @@ import com.squareup.moshi.Moshi
  */
 object Utils {
     const val scoreboardResponseSuccessfulFile = "scoreboard_response_success.json"
+    const val boxscoreResponseSuccessfulFile = "boxscore_response_success.json"
 
     fun getScoreboardResponse(): ScoreboardResponseDto? {
         val moshi: Moshi = Moshi.Builder().build()

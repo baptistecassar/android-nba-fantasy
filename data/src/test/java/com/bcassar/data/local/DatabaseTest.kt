@@ -1,6 +1,7 @@
 package com.bcassar.data.local
 
 import com.bcassar.data.local.dao.GamesDao
+import com.bcassar.data.local.dao.PlayersGameStatsDao
 import com.bcassar.data.local.dao.TeamsDao
 import com.bcassar.sharedtest.*
 import kotlinx.coroutines.runBlocking
@@ -21,6 +22,7 @@ class DatabaseTest : KoinTest {
     private val database: NbaFantasyDatabase by inject()
     private val teamsDao: TeamsDao by inject()
     private val gamesDao: GamesDao by inject()
+    private val playersGameStatsDao: PlayersGameStatsDao by inject()
 
     @Before
     fun setUp() {
@@ -40,6 +42,7 @@ class DatabaseTest : KoinTest {
         Assert.assertNotNull(database)
         Assert.assertNotNull(teamsDao)
         Assert.assertNotNull(gamesDao)
+        Assert.assertNotNull(playersGameStatsDao)
     }
 
     @Test
@@ -88,5 +91,18 @@ class DatabaseTest : KoinTest {
         Assert.assertEquals(gameAndTeams.gameEntity.gameId, game.gameId)
         Assert.assertEquals(gameAndTeams.awayTeam.teamID, blazers.teamID)
         Assert.assertEquals(gameAndTeams.homeTeam.teamID, lakers.teamID)
+    }
+
+    @Test
+    fun insertPlayerGameStatsSuccess() = runBlocking {
+        val teams = listOf(lakers, blazers)
+        teamsDao.saveTeams(teams)
+        val games = listOf(game)
+        gamesDao.saveGames(games)
+        val entities = listOf(playerGameStats)
+        playersGameStatsDao.savePlayersGameStats(entities)
+        val entitiesSaved = playersGameStatsDao.getAllPlayerGameStats()
+        Assert.assertEquals(entitiesSaved.size, 1)
+        Assert.assertEquals(entities, entitiesSaved)
     }
 }

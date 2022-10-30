@@ -59,4 +59,8 @@ val testLocalDataModule = module {
         get<NbaFantasyDatabase>().teamsDao()
     }
 
+    single {
+        get<NbaFantasyDatabase>().playersGameStatsDao()
+    }
+
 }

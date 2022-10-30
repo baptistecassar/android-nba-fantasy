@@ -41,7 +41,8 @@ internal fun TeamEntity.toDomain() =
         losses = this.losses,
     )
 
-internal fun PlayerGameStatsEntity.toDomain() =
+@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+fun PlayerGameStatsEntity.toDomain() =
     PlayerGameStats(
         playerId = this.playerId,
         playerName = this.playerName,

@@ -44,7 +44,6 @@ abstract class DayPagerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initLayout()
-        test()
     }
 
     private fun initLayout() {
@@ -62,9 +61,5 @@ abstract class DayPagerFragment : Fragment() {
     }
 
     abstract fun getDayPagerAdapter(): FragmentStateAdapter
-
-    protected open fun test() {
-
-    }
 
 }

@@ -3,11 +3,6 @@ buildscript {
     ext.compileSdkVersion = 32
     ext.minSdkVersion = 24
     ext.targetSdkVersion = 32
-
-    repositories {
-        google()
-        mavenCentral()
-    }
 }
 
 plugins {

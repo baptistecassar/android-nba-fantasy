@@ -11,6 +11,10 @@ import com.bcassar.domain.mapper.toEntity
 import com.bcassar.domain.model.Game
 import com.bcassar.domain.model.GameStatus
 import com.bcassar.domain.model.PlayerGameStats
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.withContext
 
 /**
  * Created by bcassar on 27/10/2022
@@ -46,17 +50,20 @@ class GameRepositoryImpl constructor(
         gamesDao.saveGames(games.map { it.toEntity(dayDate) })
     }
 
-    override suspend fun fetchPlayersGameStats(dayDate: String): List<PlayerGameStats> {
-        val gameIds = fetchGames(dayDate).map { it.gameId }
-        gameIds.forEach { gameId ->
-            val entities =
-                gamesApi.getBoxscore(gameId).resultSets.first { it.name == "PlayerStats" }.rowSet
-                    .mapNotNull { rowSet ->
-                        rowSet.toEntity()
-                    }
+    override suspend fun fetchPlayersGameStats(dayDate: String): List<PlayerGameStats> =
+        withContext(Dispatchers.Default) {
+            val gameIds = fetchGames(dayDate).map { it.gameId }
+            val entities = gameIds.map { gameId ->
+                async {
+                    gamesApi.getBoxscore(gameId).resultSets.first { it.name == "PlayerStats" }.rowSet
+                        .mapNotNull { rowSet ->
+                            rowSet.toEntity()
+                        }
+                }
+            }.awaitAll().flatten()
             playersGameStatsDao.savePlayersGameStats(entities)
+            return@withContext playersGameStatsDao.getPlayerGameStatsFromGames(gameIds)
+                .map { it.toDomain() }
         }
-        return playersGameStatsDao.getPlayerGameStatsFromGames(gameIds).map { it.toDomain() }
-    }
 
 }

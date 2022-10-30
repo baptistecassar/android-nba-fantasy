@@ -1,9 +1,11 @@
-package com.bcassar.nbafantasy.gamelist
+package com.bcassar.nbafantasy.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.bcassar.data.local.model.GameAndTeams
 import com.bcassar.domain.mapper.toDomain
 import com.bcassar.domain.repository.GameRepository
+import com.bcassar.nbafantasy.gamelist.GameListEvent
+import com.bcassar.nbafantasy.gamelist.GameListViewModel
 import com.bcassar.nbafantasy.utils.MainCoroutineRule
 import com.bcassar.nbafantasy.utils.getOrAwaitValue
 import com.bcassar.sharedtest.blazers

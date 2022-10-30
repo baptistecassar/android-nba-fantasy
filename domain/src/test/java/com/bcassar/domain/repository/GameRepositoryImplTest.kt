@@ -4,7 +4,6 @@ import com.bcassar.domain.di.domainModule
 import com.bcassar.sharedtest.testDate
 import com.bcassar.sharedtest.testLocalDataModule
 import com.bcassar.sharedtest.testRemoteDataModule
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -17,6 +16,7 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.robolectric.RobolectricTestRunner
+import kotlin.test.assertTrue
 
 /**
  * Created by bcassar on 27/10/2022
@@ -46,9 +46,16 @@ class GameRepositoryImplTest : KoinTest {
 
     @Test
     fun `should fetch and saves scoreboard`() = runBlocking {
-        val gameList = gameRepository.fetchGames(testDate).first()
+        val gameList = gameRepository.fetchGames(testDate)
         assertNotNull(gameList)
         assertEquals(gameList.size, 7)
+    }
+
+    @Test
+    fun `should fetch and saves player stats`() = runBlocking {
+        val playerGameStatsList = gameRepository.fetchPlayersGameStats(testDate)
+        assertNotNull(playerGameStatsList)
+        assertTrue(playerGameStatsList.isNotEmpty())
     }
 
 }

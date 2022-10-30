@@ -105,4 +105,22 @@ class DatabaseTest : KoinTest {
         Assert.assertEquals(entitiesSaved.size, 1)
         Assert.assertEquals(entities, entitiesSaved)
     }
+
+    @Test
+    fun getPlayerGameStatsFromGameSuccess() = runBlocking {
+        val teams = listOf(lakers, blazers)
+        teamsDao.saveTeams(teams)
+        val games = listOf(game, game.copy(gameId = "123456789"), game.copy(gameId = "12345"))
+        gamesDao.saveGames(games)
+        val entities = listOf(
+            playerGameStats,
+            playerGameStats.copy(gameId = "123456789"),
+            playerGameStats.copy(gameId = "12345", pts = 8)
+        )
+        playersGameStatsDao.savePlayersGameStats(entities)
+        val gameIds = listOf("123456789", game.gameId)
+        val entitiesSaved = playersGameStatsDao.getPlayerGameStatsFromGames(gameIds)
+        Assert.assertEquals(2, entitiesSaved.size)
+        Assert.assertTrue(entitiesSaved.all { gameIds.contains(it.gameId) })
+    }
 }

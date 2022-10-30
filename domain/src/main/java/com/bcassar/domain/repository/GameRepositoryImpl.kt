@@ -1,6 +1,7 @@
 package com.bcassar.domain.repository
 
 import com.bcassar.data.local.dao.GamesDao
+import com.bcassar.data.local.dao.PlayersGameStatsDao
 import com.bcassar.data.local.dao.TeamsDao
 import com.bcassar.data.remote.api.GamesApi
 import com.bcassar.data.remote.model.GameDto
@@ -9,6 +10,7 @@ import com.bcassar.domain.mapper.toDomain
 import com.bcassar.domain.mapper.toEntity
 import com.bcassar.domain.model.Game
 import com.bcassar.domain.model.GameStatus
+import com.bcassar.domain.model.PlayerGameStats
 
 /**
  * Created by bcassar on 27/10/2022
@@ -17,6 +19,7 @@ class GameRepositoryImpl constructor(
     private val gamesApi: GamesApi,
     private val teamsDao: TeamsDao,
     private val gamesDao: GamesDao,
+    private val playersGameStatsDao: PlayersGameStatsDao,
 ) : GameRepository {
 
     override suspend fun fetchGames(dayDate: String): List<Game> {
@@ -41,6 +44,19 @@ class GameRepositoryImpl constructor(
         }
         teamsDao.saveTeams(teams.map { it.toEntity() })
         gamesDao.saveGames(games.map { it.toEntity(dayDate) })
+    }
+
+    override suspend fun fetchPlayersGameStats(dayDate: String): List<PlayerGameStats> {
+        val gameIds = fetchGames(dayDate).map { it.gameId }
+        gameIds.forEach { gameId ->
+            val entities =
+                gamesApi.getBoxscore(gameId).resultSets.first { it.name == "PlayerStats" }.rowSet
+                    .mapNotNull { rowSet ->
+                        rowSet.toEntity()
+                    }
+            playersGameStatsDao.savePlayersGameStats(entities)
+        }
+        return playersGameStatsDao.getPlayerGameStatsFromGames(gameIds).map { it.toDomain() }
     }
 
 }

@@ -20,4 +20,7 @@ interface PlayersGameStatsDao {
 
     @Query("SELECT * FROM player_game_stats")
     suspend fun getAllPlayerGameStats(): List<PlayerGameStatsEntity>
+
+    @Query("SELECT * FROM player_game_stats WHERE game_id IN (:gameIds) ")
+    suspend fun getPlayerGameStatsFromGames(gameIds: List<String>): List<PlayerGameStatsEntity>
 }

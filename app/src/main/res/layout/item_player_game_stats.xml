@@ -2,6 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingHorizontal="@dimen/padding_small"
+    android:paddingTop="@dimen/padding_small"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -29,7 +31,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="@dimen/padding_extra_small"
+        android:layout_marginTop="@dimen/padding_small"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@+id/player_name" />
 

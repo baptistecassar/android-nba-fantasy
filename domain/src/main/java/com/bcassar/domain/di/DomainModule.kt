@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val domainModule = module {
 
     single<GameRepository> {
-        GameRepositoryImpl(get(), get(), get())
+        GameRepositoryImpl(get(), get(), get(), get())
     }
 
 }

@@ -9,7 +9,7 @@ import org.junit.Test
 /**
  * Created by bcassar on 27/10/2022
  */
-class DtoToEntity {
+class DtoToEntityTest {
     @Test
     fun `team is mapped correctly`() {
         val scoreboardResponse = Utils.getScoreboardResponse()
@@ -47,5 +47,16 @@ class DtoToEntity {
         assertEquals(game?.awayTeam?.teamID, entity?.awayTeamId)
         assertEquals(game?.homeTeam?.score, entity?.homeTeamScore)
         assertEquals(game?.awayTeam?.score, entity?.awayTeamScore)
+    }
+
+    @Test
+    fun `player game stats is mapped correctly`() {
+        val boxscoreResponse = Utils.getBoxscoreResponse()
+        assertNotNull(boxscoreResponse)
+        val playerGameStat =
+            boxscoreResponse?.resultSets?.first { it.name == "PlayerStats" }?.rowSet?.first()
+        assertNotNull(playerGameStat)
+        val entity = playerGameStat?.toEntity()
+        assertNotNull(entity)
     }
 }

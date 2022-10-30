@@ -1,9 +1,9 @@
 package com.bcassar.data.local
 
 import com.bcassar.data.local.dao.GamesDao
+import com.bcassar.data.local.dao.PlayersGameStatsDao
 import com.bcassar.data.local.dao.TeamsDao
 import com.bcassar.sharedtest.*
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
@@ -22,6 +22,7 @@ class DatabaseTest : KoinTest {
     private val database: NbaFantasyDatabase by inject()
     private val teamsDao: TeamsDao by inject()
     private val gamesDao: GamesDao by inject()
+    private val playersGameStatsDao: PlayersGameStatsDao by inject()
 
     @Before
     fun setUp() {
@@ -41,6 +42,7 @@ class DatabaseTest : KoinTest {
         Assert.assertNotNull(database)
         Assert.assertNotNull(teamsDao)
         Assert.assertNotNull(gamesDao)
+        Assert.assertNotNull(playersGameStatsDao)
     }
 
     @Test
@@ -79,7 +81,7 @@ class DatabaseTest : KoinTest {
         teamsDao.saveTeams(teams)
         val entities = listOf(game, game.copy(gameDay = "2022-03-08", gameId = "123456789"))
         gamesDao.saveGames(entities)
-        val entitiesSaved = gamesDao.getGameAndTeams(testDate).first()
+        val entitiesSaved = gamesDao.getGameAndTeams(testDate)
         Assert.assertEquals(entitiesSaved.size, 1)
         val gameAndTeams = entitiesSaved.first()
         Assert.assertNotNull(gameAndTeams.gameEntity)
@@ -89,5 +91,36 @@ class DatabaseTest : KoinTest {
         Assert.assertEquals(gameAndTeams.gameEntity.gameId, game.gameId)
         Assert.assertEquals(gameAndTeams.awayTeam.teamID, blazers.teamID)
         Assert.assertEquals(gameAndTeams.homeTeam.teamID, lakers.teamID)
+    }
+
+    @Test
+    fun insertPlayerGameStatsSuccess() = runBlocking {
+        val teams = listOf(lakers, blazers)
+        teamsDao.saveTeams(teams)
+        val games = listOf(game)
+        gamesDao.saveGames(games)
+        val entities = listOf(playerGameStats)
+        playersGameStatsDao.savePlayersGameStats(entities)
+        val entitiesSaved = playersGameStatsDao.getAllPlayerGameStats()
+        Assert.assertEquals(entitiesSaved.size, 1)
+        Assert.assertEquals(entities, entitiesSaved)
+    }
+
+    @Test
+    fun getPlayerGameStatsFromGameSuccess() = runBlocking {
+        val teams = listOf(lakers, blazers)
+        teamsDao.saveTeams(teams)
+        val games = listOf(game, game.copy(gameId = "123456789"), game.copy(gameId = "12345"))
+        gamesDao.saveGames(games)
+        val entities = listOf(
+            playerGameStats,
+            playerGameStats.copy(gameId = "123456789"),
+            playerGameStats.copy(gameId = "12345", pts = 8)
+        )
+        playersGameStatsDao.savePlayersGameStats(entities)
+        val gameIds = listOf("123456789", game.gameId)
+        val entitiesSaved = playersGameStatsDao.getPlayerGameStatsFromGames(gameIds)
+        Assert.assertEquals(2, entitiesSaved.size)
+        Assert.assertTrue(entitiesSaved.all { gameIds.contains(it.gameId) })
     }
 }

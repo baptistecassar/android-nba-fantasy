@@ -8,7 +8,7 @@ import java.util.*
 data class Game(
     val gameId: String,
     val gameCode: String,
-    val gameStatus: Long,
+    val gameStatus: GameStatus,
     val gameStatusText: String,
     val period: Long,
     val gameClock: String,

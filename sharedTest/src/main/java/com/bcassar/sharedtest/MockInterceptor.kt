@@ -26,6 +26,21 @@ class MockInterceptor : Interceptor {
                         )
                 )
                 .build()
+        } else if (chain.request().url.toUri().toString().contains("boxscoretraditionalv2")) {
+            val responseString = boxscoreResponse
+            return Response.Builder()
+                .request(chain.request())
+                .protocol(Protocol.HTTP_2)
+                .code(200)
+                .message(responseString)
+                .body(
+                    responseString
+                        .toByteArray()
+                        .toResponseBody(
+                            "application/json".toMediaTypeOrNull()
+                        )
+                )
+                .build()
         } else {
             //Skip the interception.
             return chain.proceed(chain.request())
